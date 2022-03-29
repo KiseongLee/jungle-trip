@@ -12,8 +12,9 @@ def login():
 @app.route('/sign')
 def sign():
     return render_template('sign.html')
+
 @app.route('/survey')
-def survey():
+def survey():    
     return render_template('survey.html')
 
 @app.route('/surveyResult')
