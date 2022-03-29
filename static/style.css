@@ -15,6 +15,12 @@ body {
 .flex {
   display: flex;
 }
+.inputTag {
+  width: 300px;
+}
+.input_Tag {
+  width: 300px;
+}
 .inputForm {
   width: 100%;
   height: 90%;
@@ -35,11 +41,13 @@ body {
   height: 30px;
   margin-bottom: 10px;
 }
-
+.field {
+  width: 300px;
+}
 .loginButton {
   width: 90px;
   height: 30px;
-  margin: 0 2px;
+  margin: 10px 7px;
   color: white;
   background-color: #387700;
   font-weight: 600;
@@ -47,7 +55,7 @@ body {
 }
 
 .signButton {
-  width: 260px;
+  width: 300px;
   height: 40px;
   color: white;
   background-color: #387700;
@@ -97,9 +105,7 @@ body {
 .radio__text {
   padding-left: 10px;
 }
-.inputTag {
-  width: 300px;
-}
+
 .answer {
   background-color: transparent;
   border: none;
