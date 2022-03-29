@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 @app.route('/')
@@ -24,6 +24,9 @@ def surveyResult():
 @app.route('/mypage')
 def myPage():
     return render_template('myPage.html')
+
+# ------ API -------
+
 
 if __name__ == "__main__":
     app.run('0.0.0.0',port=5000, debug=True)
