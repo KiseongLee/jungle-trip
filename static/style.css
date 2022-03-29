@@ -24,26 +24,25 @@ body {
   align-items: center;
 }
 
-label {
+.label {
   font-weight: bold;
   font-size: 1.2em;
-  color: #387700;
+  color: rgb(23, 71, 0);
 }
 
 .loginInput {
-  width: 250px;
+  width: 100%;
   height: 30px;
   margin-bottom: 10px;
 }
 
 .loginButton {
-  width: 80px;
+  width: 90px;
   height: 30px;
-  margin: 0 5px;
+  margin: 0 2px;
   color: white;
-  background-color: rgb(23, 71, 0);
+  background-color: #387700;
   font-weight: 600;
-  border: 1px solid rgb(23, 71, 0);
   border-radius: 5px;
 }
 
@@ -87,14 +86,14 @@ label {
   align-items: center;
 }
 .control {
-  width: 370px;
-  padding-left: 130px;
   line-height: 50px;
 }
 .radio {
   margin-right: 10px;
 }
-
+.inputTag {
+  width: 300px;
+}
 .answer {
   background-color: transparent;
   border: none;
