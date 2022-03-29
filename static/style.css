@@ -210,3 +210,34 @@ body {
   color: rgb(255, 254, 220);
   font-weight: 100;
 }
+.ttext {
+  display: flex;
+  font-size: 50px;
+  justify-content: center;
+  font-family: "Dongle", sans-serif;
+  font-family: "Jua", sans-serif;
+  color: #388700;
+  padding-top: 50px;
+}
+.img {
+  text-align: center;
+  margin-top: 50px;
+}
+.button {
+  background-color: rgb(23, 71, 0);
+  color: white;
+  font-family: "Dongle", sans-serif;
+  font-family: "Jua", sans-serif;
+}
+.BButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.card-title {
+  margin-top: 50px;
+}
+.card-text {
+  font-family: "Dongle", sans-serif;
+  font-family: "Jua", sans-serif;
+}
