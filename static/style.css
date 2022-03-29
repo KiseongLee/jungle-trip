@@ -38,8 +38,19 @@ label {
   width: 80px;
   height: 30px;
   margin: 0 5px;
-  color: #387700;
-  background-color: white;
+  color: white;
+  background-color: rgb(23, 71, 0);
+  font-weight: 600;
+  border: 1px solid rgb(23, 71, 0);
+  border-radius: 5px;
+}
+
+.signButton {
+  width: 260px;
+  height: 40px;
+  color: white;
+  background-color: rgb(23, 71, 0);
+  font-size: 16px;
   font-weight: 600;
   border: 1px solid rgb(23, 71, 0);
   border-radius: 5px;
