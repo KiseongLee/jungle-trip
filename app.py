@@ -21,7 +21,7 @@ def survey():
 def surveyResult():
     return render_template('surveyResult.html')
 
-@app.route('/myPage')
+@app.route('/mypage')
 def myPage():
     return render_template('myPage.html')
 
