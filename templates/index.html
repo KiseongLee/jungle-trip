@@ -10,21 +10,28 @@
     <ul class="card-box">
       <li class="card">
           <img class = "card__image" src="../static/hi.jpg">         
-          <div class="text"><b>강릉</b></div>          
-      </li>  
-      <li class="card">
-        <img class = "card__image" src="../static/hi.jpg">         
-        <div class="text"><b>강릉</b></div>          
-      </li>  
-      <li class="card">
-        <img class = "card__image" src="../static/hi.jpg">         
-        <div class="text"><b>강릉</b></div>          
-      </li>    
+          <div class="text"><b>강릉</b></div>   
+          <button class="like__button"><i class="fa-solid fa-heart"></i><span class="likeButtonNum">0</span></button>
+          <div class="description">강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마 강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마</div>      
+      </li>        
     </ul>
   </div>
 
   <!-- javascript -->
   <script>
+    let likes = 0;
+
+    $('.like__button').click((e)=>{
+      likes ++;
+      if(e.target.tagName === "SPAN"){
+        e.target.textContent = likes
+      }else if(e.target.tagName === "I") {
+        e.target.nextSibling.textContent = likes
+      }else{
+        e.target.children[1].textContent = likes
+      }  
+    })
+
     $('.login__button').click(()=>{
       window.location.href='./login';
     })

@@ -207,13 +207,13 @@ body {
   display: flex;
   justify-content: center;
   color: #388700;
-  margin-top: 200px;
+  margin-top: 150px;
   font-family: "Dongle", sans-serif;
   font-family: "Jua", sans-serif;
-  font-size: 60px;
+  font-size: 80px;
 }
 .card {
-  width: 400px;
+  width: 500px;
   height: 350px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
   transition: 0.3s;
@@ -221,9 +221,67 @@ body {
   border-radius: 20px;
   cursor: pointer;
   position: relative;
+  transition: all 300ms ease;
 }
 .card:hover {
+  transform: scale(1.2);
+  background-image: none;
 }
+.card:hover .text {
+  font-size: 50px;
+  transform: translate(-150%, -200%);
+  color: rgb(23, 71, 0);
+  width: 150px;
+  height: 65px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: rgb(255, 254, 220);
+}
+.like__button {
+  font-size: 24px;
+  position: absolute;
+  display: none;
+  top: 23%;
+  left: 37%;
+  color: red;
+  border: none;
+  font-weight: 100;
+  background-color: transparent;
+  transition: all 300ms all;
+  cursor: pointer;
+}
+.likeButtonNum {
+  margin-left: 5px;
+  font-weight: bold;
+}
+.description {
+  font-size: 16px;
+  margin: 0;
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 5%;
+  padding: 10px;
+  border-radius: 15px;
+  width: 90%;
+  height: 130px;
+  color: black;
+  background-color: white;
+  font-weight: 100;
+  transition: all 300ms all;
+}
+
+.card:hover .description {
+  display: block;
+}
+.card:hover .like__button {
+  display: block;
+}
+.like__button:hover {
+  color: rgb(250, 189, 237);
+  transform: scale(1.2);
+}
+
 .card__image {
   width: 100%;
   height: 100%;
@@ -245,6 +303,7 @@ body {
   transform: translate(-50%, -50%);
   color: rgb(255, 254, 220);
   font-weight: 100;
+  transition: all 300ms all;
 }
 .ttext {
   display: flex;
