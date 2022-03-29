@@ -12,15 +12,16 @@ def login():
 @app.route('/sign')
 def sign():
     return render_template('sign.html')
+
 @app.route('/survey')
-def survey():
+def survey():    
     return render_template('survey.html')
 
 @app.route('/surveyResult')
 def surveyResult():
     return render_template('surveyResult.html')
 
-@app.route('/myPage')
+@app.route('/mypage')
 def myPage():
     return render_template('myPage.html')
 
