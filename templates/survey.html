@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/7b383c2d35.js" crossorigin="anonymous"></script>
-    <title>survey</title>
-</head>
-<body>
+
     {% extends "base.html" %}
     {% block content %}
     <div class="surveyContainer">
@@ -17,15 +8,13 @@
      <div class="survey_answers">
          <button class="answer answer_pre"><i class="fa-solid fa-angle-left"></i></button>
          <div class="control">
-            <label class="radio"><input type="radio" name="answer">아아아아</label><br>
-            <label class="radio"><input type="radio" name="answer">아아아아</label><br>
-            <label class="radio"><input type="radio" name="answer">아아아아아아아아</label><br>
-            <label class="radio"><input type="radio" name="answer">아아아아</label><br>
-            <label class="radio"><input type="radio" name="answer">아아아아</label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
           </div>
          <button class="answer answer_next"><i class="fa-solid fa-angle-right"></i></button>
      </div>
     </div>
     {% endblock %}    
-</body>
-</html>
