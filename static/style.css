@@ -78,6 +78,7 @@ body {
   margin-bottom: 30px;
 }
 .survey__question {
+  font-size: 36px;
   margin-bottom: 20px;
 }
 .survey_answers {
@@ -85,10 +86,16 @@ body {
   align-items: center;
 }
 .control {
+  margin: 0 100px;
+  margin-top: 50px;
   line-height: 50px;
 }
 .radio {
+  font-size: 24px;
   margin-right: 10px;
+}
+.radio__text {
+  padding-left: 10px;
 }
 .inputTag {
   width: 300px;
