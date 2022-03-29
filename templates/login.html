@@ -17,16 +17,28 @@
         
             <div class="field is-grouped flex">
                 <div class="">
-                    <button class="button loginButton">로그인</button>
+                    <button class="button login_Button">로그인</button>
                 </div>
                 <div class="">
-                    <button class="button loginButton">회원가입</button>
+                    <button class="button sign_Button">회원가입</button>
                 </div>
                 <div class="">
-                    <button class="button loginButton">취향조사</button>
+                    <button class="button survey_Button">취향조사</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
+<!-- javascript -->
+  <script>
+    $('.login_Button').click(()=>{
+        window.location.href='./';
+    })
+    $('.sign_Button').click(()=>{
+      window.location.href='./sign';
+    })
+    $('.survey_Button').click(()=>{
+        window.location.href='./survey';
+      })
+
+  </script>
 {%endblock %}

@@ -3,17 +3,59 @@
     <div class="surveyContainer">
      <h1 class="survey__title">취향조사</h1>
      <div class="divider"></div>
-     <h3 class="survey__question">Q1. 당신이 선호하는 지역은?</h3>
+     <h3 class="survey__question">Q<span class="q__num">1</span>. <span class="q__title">당신이 선호하는 지역은?</span></h3>
      <div class="survey_answers">
          <button class="answer answer_pre"><i class="fa-solid fa-angle-left"></i></button>
          <div class="control">
-            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer"><span class="radio__text">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text answer1">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text answer2">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text answer3">아아아아아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text answer4">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer"><span class="radio__text answer5">아아아아</span></label><br>
           </div>
          <button class="answer answer_next"><i class="fa-solid fa-angle-right"></i></button>
      </div>
     </div>
+     <!-- javascript -->
+    <script>
+        const qNum = $('.q__num');
+        const qTitle = $('.q__title');
+        const answers = $('.control');
+        const answer1 = $('.answer1')
+        const answer2 = $('.answer2')
+        const answer3 = $('.answer3')
+        const answer4 = $('.answer4')
+        const answer5 = $('.answer5')
+
+        let questionNum = 1;        
+        const questions = {
+            1: {"question": "1번 질문입니다.", "answers": ['코타키나발루','코타키나발루','코타키나발루','코타키나발루','코타키나발루', ]},
+            2: {"question": "2번 질문입니다.", "answers": ['대한민국','일본','코타키나발루','코타키나발루','코타키나발루', ]},
+            3: {"question": "3번 질문입니다.", "answers": ['코타키나발루','대한민국','코타키나발루','일본','코타키나발루', ]},
+            4: {"question": "4번 질문입니다.", "answers": ['코타키나발루','일본','대한민국','코타키나발루','코타키나발루', ]},
+            5: {"question": "5번 질문입니다.", "answers": ['일본','코타키나발루','코타키나발루','대한민국','코타키나발루', ]},
+            }
+
+        $('.answer_pre').click(()=>{
+            questionNum == 1 ? 1 : questionNum--;
+            qNum.text(questionNum)
+            qTitle.text(questions[questionNum].question)
+            answer1.text(questions[questionNum].answers[0])
+            answer2.text(questions[questionNum].answers[1])
+            answer3.text(questions[questionNum].answers[2])
+            answer4.text(questions[questionNum].answers[3])
+            answer5.text(questions[questionNum].answers[4])
+        })
+        $('.answer_next').click(()=>{
+            questionNum == 5 ? 5 : questionNum++;
+            qNum.text(questionNum)  
+            qTitle.text(questions[questionNum].question)  
+            answer1.text(questions[questionNum].answers[0])
+            answer2.text(questions[questionNum].answers[1])
+            answer3.text(questions[questionNum].answers[2])
+            answer4.text(questions[questionNum].answers[3])
+            answer5.text(questions[questionNum].answers[4])
+        })
+        
+    </script>
     {% endblock %}    

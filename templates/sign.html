@@ -4,31 +4,28 @@
         <div class="field">
             <label class="label">이름</label>
             <div class=" has-icons-left has-icons-right">
-            <input class="input  loginInput" type="text"  >
-                   
+                <input class="input  loginInput" type="text">                   
             </div>       
         </div>
 
         <div class="field">
             <label class="label">아이디</label>
             <div class=" has-icons-left has-icons-right">
-            <input class="input loginInput " type="password">        
+                <input class="input loginInput " type="password">        
             </div>       
         </div>      
 
         <div class="field">
             <label class="label">비밀번호</label>
             <div class=" has-icons-left has-icons-right">
-            <input class="input loginInput" type="text"  >
-                     
+                <input class="input loginInput" type="text">                     
             </div>       
         </div>
 
         <div class="field">
             <label class="label">비밀번호 확인</label>
             <div class=" has-icons-left has-icons-right">
-            <input class="input loginInput" type="text"  >
-                  
+                <input class="input loginInput" type="text"  >                  
             </div>       
         </div>      
     
@@ -37,4 +34,11 @@
         </div>
     </div>
 </div>
+<!-- javascript -->
+<script>
+    $('.signButton').click(()=>{
+        alert('회원가입 완료되었습니다.');
+        window.location.href='..';
+    })    
+  </script>
 {%endblock %}

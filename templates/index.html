@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="Button">
-      <button class="main__button">Login</button>
-      <button class="main__button">My page</button>
+      <button class="main__button login__button" >Login</button>
+      <button class="main__button myPage__button" >My page</button>
     </div>
     
     <div id="title"> My Jungle Trip  </div>
@@ -12,6 +12,24 @@
           <img class = "card__image" src="../static/hi.jpg">         
           <div class="text"><b>강릉</b></div>          
       </li>  
+      <li class="card">
+        <img class = "card__image" src="../static/hi.jpg">         
+        <div class="text"><b>강릉</b></div>          
+      </li>  
+      <li class="card">
+        <img class = "card__image" src="../static/hi.jpg">         
+        <div class="text"><b>강릉</b></div>          
+      </li>    
     </ul>
   </div>
+
+  <!-- javascript -->
+  <script>
+    $('.login__button').click(()=>{
+      window.location.href='./login';
+    })
+    $('.myPage__button').click(()=>{
+      window.location.href='./mypage';
+    })
+  </script>
 {%endblock %}
