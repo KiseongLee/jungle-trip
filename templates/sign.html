@@ -4,28 +4,28 @@
         <div class="field">
             <label class="label">이름</label>
             <div class=" has-icons-left has-icons-right">
-                <input class="input  loginInput" type="text">                   
+                <input class="input nameInput" type="text">                   
             </div>       
         </div>
 
         <div class="field">
             <label class="label">아이디</label>
             <div class=" has-icons-left has-icons-right">
-                <input class="input loginInput " type="password">        
+                <input class="input idInput " type="password">        
             </div>       
         </div>      
 
         <div class="field">
             <label class="label">비밀번호</label>
             <div class=" has-icons-left has-icons-right">
-                <input class="input loginInput" type="text">                     
+                <input class="input pwdInput" type="password">                     
             </div>       
         </div>
 
         <div class="field">
             <label class="label">비밀번호 확인</label>
             <div class=" has-icons-left has-icons-right">
-                <input class="input loginInput" type="text"  >                  
+                <input class="input rePwdInput" type="password"  >                  
             </div>       
         </div>      
     
@@ -36,9 +36,21 @@
 </div>
 <!-- javascript -->
 <script>
+
+    const nameInput = $('.nameInput');
+    const idInput = $('.idInput');
+    const pwdInput = $('.pwdInput');
+    const rePwdInput = $('.rePwdInput');
+
     $('.signButton').click(()=>{
+        const name = nameInput.val()
+        const id = idInput.val()
+        const pwd = pwdInput.val()
+        const repwd = rePwdInput.val()
+        console.log(name, id, pwd, repwd)
+        // 회원가입 로직 필요
         alert('회원가입 완료되었습니다.');
-        window.location.href='..';
+        window.location.href='./';
     })    
   </script>
 {%endblock %}

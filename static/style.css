@@ -41,6 +41,26 @@ body {
   height: 30px;
   margin-bottom: 10px;
 }
+.nameInput {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.idInput {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.pwdInput {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.rePwdInput {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
 .field {
   width: 300px;
 }
