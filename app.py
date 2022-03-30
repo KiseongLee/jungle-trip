@@ -42,7 +42,8 @@ def myPage():
 # 1. 도시 조회(GET)
 @app.route('/read', methods=['GET'])
 def read():
-    cities = list(db.mytype.find({},{'_id': False}))    
+    
+    cities = list(db.mytype.find({},{'_id': False}).sort("like", -1))    
     return jsonify({'result':'success', 'cities':cities})
 
 #회원가입 API
@@ -89,6 +90,7 @@ def api_login():
 
 SECRET_KEY = 'secret_key'
 
+
 # 2. 좋아요(POST)
 @app.route('/like', methods=['post'])
 def like():    
@@ -106,7 +108,7 @@ def setData():
             'id' : 1, 
             'city' : '단양',
             'image' : './static/단양.jpg',
-            'desc' : "예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 ",
+            'desc' : "충청북도 단양군<br> 여행지 : 단양 도담 삼봉&석문, 고수동굴, 만천하스카이워크<br> 먹거리 : 쏘가리 매운탕, 마늘 떡갈비, 마늘치킨<br> 액티비티 : 패러글라이딩, 짚와이어, 래프팅, 루어낚시, 유람선<br>",
             'like' : 0,
             'type' : 'D'
         },
@@ -114,7 +116,7 @@ def setData():
             'id' : 2, 
             'city' : '포항',
             'image' : './static/포항.jpg',
-            'desc' : "예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 ",
+            'desc' : "경상남도 포항시<br> 여행지 : 환호공원 스페이스 워크, 영일교, 호미곶 해맞이 광장<br> 먹거리 : 시락국, 대게, 과메기, 고래 고기, 모리 국수<br> 액티비티 : 호미곶ATV, 포항크루즈<br> ",
             'like' : 0,
             'type' : 'C'
         },
@@ -122,7 +124,7 @@ def setData():
             'id' : 3, 
             'city' : '제주도',
             'image' : './static/제주도.jpg',
-            'desc' : "은갈치 은갈치 은갈치 은갈치 은갈치 은갈치 은갈치 예쁘다 ",
+            'desc' : "제주특별자치도<br> 여행지 : 성산일출봉, 한라산, 올레길, 비자림<br> 먹거리 : 흑돼지삼겹살, 고기국수, 돔베고기, 성게미역국<br> 액티비티 : 바체올린 카약, 더마파크 승마, 974 카트 테마파크<br> ",
             'like' : 0,
             'type' : 'C'
         },
@@ -130,7 +132,7 @@ def setData():
             'id' : 4, 
             'city' : '강릉',
             'image' : './static/강릉.jpg',
-            'desc' : "가지마 가지마 가지마 가지마 가지마 가지마 가지마 가지마",
+            'desc' : " 강원도 강릉시<br> 여행지 : 경포해수욕장, 오죽헌, 경포대, 정동진 해변 <br>먹거리 : 초당 두부, 감자 옹심이, 물회, 장칼국수 <br> 액티비티 : 서핑, 요트투어, 정동진 레일바이크<br>",
             'like' : 0,
             'type' : 'B'
         },
@@ -138,7 +140,7 @@ def setData():
             'id' : 5, 
             'city' : '여수',
             'image' : './static/여수.jpg',
-            'desc' : "엑스포 엑스포 엑스포 엑스포 엑스포 엑스포 엑스포 엑스포",
+            'desc' : "전라남도 여수시<br> 여행지 : 오동도, 향일암, 여수 아쿠아리움, 아이뮤지엄 미디어 포레스트<br> 먹거리 : 돌산갓김치, 게장 백반, 서대회무침<br> 액티비티 : 유월드 루지 테마파크, 라마다 여수 해상 짚트랙<br>",
             'like' : 0,
             'type' : 'E'
         } ,
@@ -146,7 +148,7 @@ def setData():
             'id' : 6, 
             'city' : '광안리',
             'image' : './static/광안리.jpg',
-            'desc' : "갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기",
+            'desc' : "부산 광역시<br> 여행지 : 해운대, 광안리, 태종대유원지, 감천문화마을<br> 먹거리 : 돼지국밥, 밀면, 제철 회, 냉채 족발, 동래파전<br> 액티비티 : 광안리 제트보트&요트투어, 패들보드, 카약, 카이트 서핑<br>",
             'like' : 0,
             'type' : 'C'
         }      
