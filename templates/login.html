@@ -16,16 +16,12 @@
                 </div>       
             </div>      
         
-            <div class="field is-grouped flex">
-                <div class="">
-                    <button class="button login_Button" onclick="login()">로그인</button>
-                </div>
-                <div class="">
-                    <button class="button sign_Button">회원가입</button>
-                </div>
-                <div class="">
+            <div class="field  flex">                
+                <button class="button login_Button w" onclick="login()">로그인</button> 
+                <button class="button sign_Button w">회원가입</button>                
+                <!-- <div class="">
                     <button class="button survey_Button">취향조사</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -57,11 +53,7 @@
             }
         }
         }   )
-    }
-            
-    
-
-
+    }           
     $('.sign_Button').click(()=>{
       window.location.href='./sign';
     })

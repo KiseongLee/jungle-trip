@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block content %}
-    
+{% block content %}   
+ 
     <div class="Button">
       {% if request.cookies.get('mytoken') %}
       <button class="main__button logout__button" onclick="logout()" >Logout</button>
@@ -17,7 +17,7 @@
   </div>
 
   <!-- javascript -->
-  <script>
+  <script>    
     const cardBox = $('.card-box')    
     
     function onClickLike(city){     
@@ -54,6 +54,10 @@
     })
     
     $('.myPage__button').click(()=>{
+      if(document.cookie.split("=")[1] === undefined){
+        alert('로그인 해주세요.')
+        return
+      }
       window.location.href='./mypage';
     })
 
