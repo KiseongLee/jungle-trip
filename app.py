@@ -39,7 +39,8 @@ def myPage():
 # 1. 도시 조회(GET)
 @app.route('/read', methods=['GET'])
 def read():
-    cities = list(db.mytype.find({},{'_id': False}))    
+    
+    cities = list(db.mytype.find({},{'_id': False}).sort("like", -1))    
     return jsonify({'result':'success', 'cities':cities})
 
 #회원가입 API
@@ -74,6 +75,7 @@ def api_login():
           return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 SECRET_KEY = 'secret_key'
+
 
 # 2. 좋아요(POST)
 @app.route('/like', methods=['post'])

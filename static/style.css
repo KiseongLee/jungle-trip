@@ -7,12 +7,21 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
+
 .frame {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: rgb(255, 254, 220);
 }
+
+.frontpage {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 254, 220) !important;
+}
+
 .flex {
   display: flex;
 }
@@ -399,8 +408,6 @@ body {
 }
 .myLike:hover {
   transform: scale(1.2);
-}
-.myLikeNum {
 }
 .myDeleteButton {
   margin-left: 15px;
