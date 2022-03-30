@@ -17,7 +17,7 @@
         
             <div class="field is-grouped flex">
                 <div class="">
-                    <button class="button login_Button">로그인</button>
+                    <button class="button login_Button" onclick="login()">로그인</button>
                 </div>
                 <div class="">
                     <button class="button sign_Button">회원가입</button>
@@ -31,18 +31,36 @@
 
   <!-- javascript -->
   <script>
-    const idInput = $('.idInput');
-    const pwdInput = $('.pwdInput');
-
-    $('.login_Button').click(()=>{
-        const id = idInput.val()
-        const pwd = pwdInput.val()
+    
+    function login(){
+        const id = $('.idInput').val();
+        const pwd = $('.pwdInput').val();
         console.log(id, pwd)
-        // 로그인 로직 필요
-        idInput.val("")
-        pwdInput.val("")
-        window.location.href='./';        
-    })
+        
+        $.ajax({
+            type: "POST", 
+            url: "/api/login", 
+            data: { id_give: id, pwd_give: pwd }, 
+            success: function(response){ 
+            if (response["result"] == "success") {
+                
+                $.cookie('mytoken', response['token'])
+
+                alert("로그인 완료!");
+                window.location.href ='/'
+			
+            } else {
+            alert(response['msg'])
+            $('.idInput').val("")
+            $('.pwdInput').val("");
+            }
+        }
+        }   )
+    }
+            
+    
+
+
     $('.sign_Button').click(()=>{
       window.location.href='./sign';
     })

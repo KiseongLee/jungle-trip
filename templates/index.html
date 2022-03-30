@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="Button">
+      {% if request.cookies.get('mytoken') %}
+      <button class="main__button logout__button" onclick="logout()" >Logout</button>
+      <button class="main__button myPage__button" >My page</button>
+      {% else %}
       <button class="main__button login__button" >Login</button>
       <button class="main__button myPage__button" >My page</button>
+      {% endif %}
     </div>
     
     <div id="title"> My Jungle Trip  </div>
@@ -35,6 +40,11 @@
       window.location.href='./mypage';
     })
 
+function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃!')
+        window.location.href='/'}
+
     $.ajax({
       type : "GET",
       url : "/read",
@@ -47,7 +57,7 @@
         }
       }
     })
-
+  
     function makeCard(data){
       const card = `<li class="card">
         <img class = "card__image" src="${data['image']}">         

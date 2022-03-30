@@ -11,7 +11,7 @@
         <div class="field">
             <label class="label">아이디</label>
             <div class=" has-icons-left has-icons-right">
-                <input class="input idInput " type="password">        
+                <input class="input idInput " type="text">        
             </div>       
         </div>      
 
@@ -30,26 +30,44 @@
         </div>      
     
         <div class="field is-grouped">            
-            <button class="button signButton">가입하기</button>                    
+            <button class="button signButton" onclick="sign()">가입하기</button>                    
         </div>
     </div>
 </div>
 <!-- javascript -->
 <script>
-    const nameInput = $('.nameInput');
-    const idInput = $('.idInput');
-    const pwdInput = $('.pwdInput');
-    const rePwdInput = $('.rePwdInput');
 
-    $('.signButton').click(()=>{
-        const name = nameInput.val()
-        const id = idInput.val()
-        const pwd = pwdInput.val()
-        const repwd = rePwdInput.val()
-        console.log(name, id, pwd, repwd)
+function sign(){
+    const name = $('.nameInput').val();
+    const id = $('.idInput').val();
+    const pwd = $('.pwdInput').val();
+    const repwd = $('.rePwdInput').val();
+
+  
+    console.log(name, id, pwd, repwd)
+
+        if (pwd != repwd){
+            alert("비밀번호 불일치");
+            return false;
+        }
         // 회원가입 로직 필요
-        alert('회원가입 완료되었습니다.');
-        window.location.href='./';
-    })    
+        $.ajax({
+            type: "POST", // POST 방식으로 요청하겠다.
+            url: "/api/sign", // /memo라는 url에 요청하겠다.
+            data: { name_give : name, id_give: id, pwd_give: pwd }, // 데이터를 주는 방법
+            success: function(response){ // 성공하면
+            if (response["result"] == "success") {
+            alert("회원가입 완료되었습니다");
+			// 3. 성공 시 페이지 새로고침하기
+            window.location.reload();
+            window.location.href='/login'
+            } else {
+            alert("서버 오류!")
+            }
+        }})
+        
+    
+     
+}
   </script>
 {%endblock %}
