@@ -7,36 +7,58 @@
     
     <div id="title"> My Jungle Trip  </div>
 
-    <ul class="card-box">
-      <li class="card">
-          <img class = "card__image" src="../static/hi.jpg">         
-          <div class="text"><b>강릉</b></div>   
-          <button class="like__button"><i class="fa-solid fa-heart"></i><span class="likeButtonNum">0</span></button>
-          <div class="description">강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마 강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마강릉 가지마</div>      
-      </li>        
-    </ul>
+    <ul class="card-box"></ul>
   </div>
 
   <!-- javascript -->
   <script>
-    let likes = 0;
-
-    $('.like__button').click((e)=>{
-      likes ++;
-      if(e.target.tagName === "SPAN"){
-        e.target.textContent = likes
-      }else if(e.target.tagName === "I") {
-        e.target.nextSibling.textContent = likes
-      }else{
-        e.target.children[1].textContent = likes
-      }  
-    })
+    const cardBox = $('.card-box')    
+    
+    function onClickLike(city){
+      $.ajax({
+        type : "POST",
+        url : "/like",
+        data : {'city' : city},
+        success : res => {
+          if(res['result'] === 'success'){
+            window.location.reload()
+          }
+        }
+      })
+    }    
 
     $('.login__button').click(()=>{
       window.location.href='./login';
     })
+    
     $('.myPage__button').click(()=>{
       window.location.href='./mypage';
     })
+
+    $.ajax({
+      type : "GET",
+      url : "/read",
+      data : {},
+      success : (res)=>{
+        if(res['result'] === "success"){
+          res['cities'].map((data)=>{
+            makeCard(data)
+          })
+        }
+      }
+    })
+
+    function makeCard(data){
+      const card = `<li class="card">
+        <img class = "card__image" src="${data['image']}">         
+        <div class="text"><b>${data['city']}</b></div>   
+        <button class="like__button" onclick="onClickLike('${data['city']}')">
+          <i class="fa-solid fa-heart"></i>
+          <span class="likeButtonNum">${data['like']}</span>
+        </button>
+        <div class="description">${data['desc']}</div>      
+    </li>`
+      cardBox.append(card)
+    }
   </script>
 {%endblock %}
