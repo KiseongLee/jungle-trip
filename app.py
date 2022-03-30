@@ -111,6 +111,41 @@ def survey_last_result():
     type = contents[0]['type']
     return jsonify({"result":"success", 'city' : city, 'img':img, 'desc':desc, 'like':like, 'type':type})
 
+# 5. (MyPage) get types
+@app.route('/myPage', methods = ['POST'])
+def myPages_getTypes():
+    userId = request.form['userId']
+    user = db.user.find_one({'id' : userId})
+    types = user['type']
+    
+    print(types)   
+    return jsonify({"result":"success", 'type' : types })
+
+# 6. 
+@app.route('/myPage/cards', methods = ['POST'])
+def myPage_cards():
+    userType = request.form['userType']
+    contents = list(db.mytype.find({'type' : userType}))
+    city = contents[0]['city']
+    img = contents[0]['image']
+    desc = contents[0]['desc']
+    like = contents[0]['like']
+    type = contents[0]['type']
+    return jsonify({"result" : "success", 'city' : city, 'img':img, 'desc':desc, 'like':like, 'type':type})
+    
+# 7. delete card
+@app.route('/mypage/delete', methods = ['POST'])
+def myPage_delete():
+    userId = request.form['userId']
+    index = int(request.form['index'])
+    user = db.user.find_one({'id' : userId})
+    types = user['type']    
+    types.remove(types[index])          
+    db.user.update_one({'id':userId}, {'$set':{'type':types}})    
+    
+    return jsonify({'result' : "success"});
+    
+    
 # 초기 데이터 불러오기
 def setData():
     db.mytype.drop()
@@ -121,15 +156,15 @@ def setData():
             'image' : './static/단양.jpg',
             'desc' : "충청북도 단양군<br> 여행지 : 단양 도담 삼봉&석문, 고수동굴, 만천하스카이워크<br> 먹거리 : 쏘가리 매운탕, 마늘 떡갈비, 마늘치킨<br> 액티비티 : 패러글라이딩, 짚와이어, 래프팅, 루어낚시, 유람선<br>",
             'like' : 0,
-            'type' : 'D'
+            'type' : 'B'
         },
         {
             'id' : 2, 
-            'city' : '포항',
-            'image' : './static/포항.jpg',
+            'city' : '가평',
+            'image' : './static/가평.jpg',
             'desc' : "경상남도 포항시<br> 여행지 : 환호공원 스페이스 워크, 영일교, 호미곶 해맞이 광장<br> 먹거리 : 시락국, 대게, 과메기, 고래 고기, 모리 국수<br> 액티비티 : 호미곶ATV, 포항크루즈<br> ",
             'like' : 0,
-            'type' : 'C'
+            'type' : 'D'
         },
         {
             'id' : 3, 
@@ -145,7 +180,7 @@ def setData():
             'image' : './static/강릉.jpg',
             'desc' : " 강원도 강릉시<br> 여행지 : 경포해수욕장, 오죽헌, 경포대, 정동진 해변 <br>먹거리 : 초당 두부, 감자 옹심이, 물회, 장칼국수 <br> 액티비티 : 서핑, 요트투어, 정동진 레일바이크<br>",
             'like' : 0,
-            'type' : 'B'
+            'type' : 'E'
         },
         {
             'id' : 5, 
@@ -153,7 +188,7 @@ def setData():
             'image' : './static/여수.jpg',
             'desc' : "전라남도 여수시<br> 여행지 : 오동도, 향일암, 여수 아쿠아리움, 아이뮤지엄 미디어 포레스트<br> 먹거리 : 돌산갓김치, 게장 백반, 서대회무침<br> 액티비티 : 유월드 루지 테마파크, 라마다 여수 해상 짚트랙<br>",
             'like' : 0,
-            'type' : 'E'
+            'type' : 'A'
         } ,
          {
             'id' : 6, 
@@ -161,7 +196,7 @@ def setData():
             'image' : './static/광안리.jpg',
             'desc' : "부산 광역시<br> 여행지 : 해운대, 광안리, 태종대유원지, 감천문화마을<br> 먹거리 : 돼지국밥, 밀면, 제철 회, 냉채 족발, 동래파전<br> 액티비티 : 광안리 제트보트&요트투어, 패들보드, 카약, 카이트 서핑<br>",
             'like' : 0,
-            'type' : 'C'
+            'type' : 'Y'
         }      
     ]   
     for data in datas :

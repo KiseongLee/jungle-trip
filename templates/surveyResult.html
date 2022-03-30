@@ -15,7 +15,8 @@
     $('.main__button').click(()=>{
       window.location.href='./';
     })    
-    function getToken(){
+
+  function getToken(){
       const token = document.cookie.split("=")[1]
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
