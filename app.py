@@ -6,8 +6,8 @@ import hashlib
 import jwt
 import datetime
 
-client = MongoClient('localhost',27017)
-# client = MongoClient('mongodb://test:test@13.125.207.140',27017)
+# client = MongoClient('localhost',27017)
+client = MongoClient('mongodb://test:test@13.125.207.140',27017)
 db = client.dbweek0
 
 app = Flask(__name__)
@@ -71,8 +71,7 @@ def api_login():
          'id': id_receive, 
          'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400) #언제까지 유효한지 
      }      
-     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')     
-    #  .decode('utf-8') 
+     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8') 
      return jsonify({'result': 'success', 'token': token})      
     else: 
           return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
