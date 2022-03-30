@@ -3,15 +3,15 @@
     <div class="surveyContainer">
      <h1 class="survey__title">취향조사</h1>
      <div class="divider"></div>
-     <h3 class="survey__question">Q<span class="q__num">1</span>. <span class="q__title">당신이 선호하는 지역은?</span></h3>
+     <h3 class="survey__question">Q<span class="q__num">1</span>. <span class="q__title">선호하는 지역은 어디신가요?</span></h3>
      <div class="survey_answers">
          <button class="answer answer_pre"><i class="fa-solid fa-angle-left"></i></button>
          <div class="control radioButtons">
-            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer1">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer2">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer3">아아아아아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer4">아아아아</span></label><br>
-            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer5">아아아아</span></label><br>
+            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer1">경기도</span></label><br>
+            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer2">강원도</span></label><br>
+            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer3">경상도</span></label><br>
+            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer4">충청도</span></label><br>
+            <label class="radio"><input type="radio" name="answer" ><span class="radio__text answer5">전라도</span></label><br>
           </div>
          <button class="answer answer_next"><i class="fa-solid fa-angle-right"></i></button>
      </div>
@@ -33,11 +33,11 @@
 
         let questionNum = 1;        
         const questions = {
-            1: {"question": "1번 질문입니다.", "answers": ['코타키나발루','코타키나발루','코타키나발루','코타키나발루','코타키나발루', ]},
-            2: {"question": "2번 질문입니다.", "answers": ['대한민국','일본','코타키나발루','코타키나발루','코타키나발루', ]},
-            3: {"question": "3번 질문입니다.", "answers": ['코타키나발루','대한민국','코타키나발루','일본','코타키나발루', ]},
-            4: {"question": "4번 질문입니다.", "answers": ['코타키나발루','일본','대한민국','코타키나발루','코타키나발루', ]},
-            5: {"question": "5번 질문입니다.", "answers": ['일본','코타키나발루','코타키나발루','대한민국','코타키나발루', ]},
+            1: {"question": "선호하는 지역은 어디신가요?", "answers": ['경기도','강원도','경상도','충청도','전라도' ]},
+            2: {"question": "함께 여행하는 인원은 총 몇 명인가요?", "answers": ['혼자','1명~2명','2명~3명','3명~4명','4명 이상', ]},
+            3: {"question": "선호하는 음식군이 있나요?", "answers": ['한식','중식','양식','일식','아무거나 잘 먹어요', ]},
+            4: {"question": "여행지에서 가장 하고 싶은 활동이 무엇인가요?", "answers": ['패러글라이딩','호캉스','맛집탐방','현지인 체험', '뭐든 좋아요', ]},
+            5: {"question": "예상 지출 비용은 얼마인가요?", "answers": ['5만원 이하','5만원~10만원','10만원~30만원','30만원 이상','돈 상관없어요', ]},
         }
 
         $('.answer_pre').click(()=>{
@@ -61,21 +61,38 @@
             answer2.text(questions[questionNum].answers[1])
             answer3.text(questions[questionNum].answers[2])
             answer4.text(questions[questionNum].answers[3])
-            answer5.text(questions[questionNum].answers[4])            
+            answer5.text(questions[questionNum].answers[4])
             selected.push(select)
             radio.checked = false;
             if(selected.length === 5){
-                // post 해야한다
-                console.log(selected)
+                // post 해야한다               
+                console.log( getType(selected[0]))
                 window.location.href='./surveyResult';
             }
-
         })        
+
         radioButtons.click((e)=>{
             if(e.target.tagName === "SPAN")return
             radio = e.target.parentNode.childNodes[0]
             select = e.target.parentNode.childNodes[1].textContent
-        })
+        })      
         
+        function getType(location){
+            if(location === '경기도'){
+               return 'A'
+            }
+            else if(location === '강원도'){
+                return 'B'
+            }
+            else if(location === '경상도'){
+                return 'C'
+            }
+            else if(location === '충청도'){
+                return 'D'
+            }
+            else { //전라도
+                return 'E'   
+            }
+        }
     </script>
     {% endblock %}    
