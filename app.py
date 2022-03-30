@@ -48,38 +48,28 @@ def api_register():
     # 1. 클라이언트로부터 데이터 받기
     name_receive = request.form['name_give']
     id_receive = request.form['id_give'] 
-    pw_receive = request.form['pwd_give'] 
+    pw_receive = request.form['pwd_give']     
      
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest() 
-
-    db.user.insert_one({'name': name_receive, 'id': id_receive, 'pw': pw_hash }) 
-    
+    db.user.insert_one({'name': name_receive, 'id': id_receive, 'pw': pw_hash,'type':[] })     
     return jsonify({'result': 'success'})
 
 @app.route('/api/login', methods=['POST']) 
 def api_login(): 
-
     id_receive = request.form['id_give'] 
-    pw_receive = request.form['pwd_give'] 
+    pw_receive = request.form['pwd_give']     
     
-    
-    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-
-    
+    pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()    
     result = db.user.find_one({'id': id_receive, 'pw': pw_hash}) 
     
      
-    if result is not None: 
-         
+    if result is not None:          
      payload = { 
          'id': id_receive, 
-         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=2400) #언제까지 유효한지 
-     } 
-     
-     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256') 
-     
-     return jsonify({'result': 'success', 'token': token}) 
-     
+         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400) #언제까지 유효한지 
+     }      
+     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')      
+     return jsonify({'result': 'success', 'token': token})      
     else: 
           return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
@@ -94,6 +84,33 @@ def like():
     db.mytype.update_one({'city':cityName}, {'$set' : {'like' : new_like}})
     return jsonify({'result':"success"})
 
+# 3. 설문조사(POST)
+@app.route('/survey/result', methods = ['post'])
+def survey_result():
+    userId = request.form['userId']
+    userType = request.form['userType']
+    
+    user = db.user.find_one({'id' : userId})
+    types = user['type']
+    types.append(userType)
+    db.user.update_one({'id':userId}, {'$set':{'type':types}})    
+    return jsonify({'result':"success"})
+
+# 4. get LastType
+@app.route('/survey/read', methods = ['POST'])
+def survey_last_result():
+    userId = request.form['userId']
+    user = db.user.find_one({'id' : userId})
+    lastType = user['type'][-1]
+    
+    contents = list(db.mytype.find({'type' : lastType}))
+    city = contents[0]['city']
+    img = contents[0]['image']
+    desc = contents[0]['desc']
+    like = contents[0]['like']
+    type = contents[0]['type']
+    return jsonify({"result":"success", 'city' : city, 'img':img, 'desc':desc, 'like':like, 'type':type})
+
 # 초기 데이터 불러오기
 def setData():
     db.mytype.drop()
@@ -102,7 +119,7 @@ def setData():
             'id' : 1, 
             'city' : '단양',
             'image' : './static/단양.jpg',
-            'desc' : "예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 ",
+            'desc' : "충청북도 단양군<br> 여행지 : 단양 도담 삼봉&석문, 고수동굴, 만천하스카이워크<br> 먹거리 : 쏘가리 매운탕, 마늘 떡갈비, 마늘치킨<br> 액티비티 : 패러글라이딩, 짚와이어, 래프팅, 루어낚시, 유람선<br>",
             'like' : 0,
             'type' : 'D'
         },
@@ -110,7 +127,7 @@ def setData():
             'id' : 2, 
             'city' : '포항',
             'image' : './static/포항.jpg',
-            'desc' : "예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 예쁘다 ",
+            'desc' : "경상남도 포항시<br> 여행지 : 환호공원 스페이스 워크, 영일교, 호미곶 해맞이 광장<br> 먹거리 : 시락국, 대게, 과메기, 고래 고기, 모리 국수<br> 액티비티 : 호미곶ATV, 포항크루즈<br> ",
             'like' : 0,
             'type' : 'C'
         },
@@ -118,7 +135,7 @@ def setData():
             'id' : 3, 
             'city' : '제주도',
             'image' : './static/제주도.jpg',
-            'desc' : "은갈치 은갈치 은갈치 은갈치 은갈치 은갈치 은갈치 예쁘다 ",
+            'desc' : "제주특별자치도<br> 여행지 : 성산일출봉, 한라산, 올레길, 비자림<br> 먹거리 : 흑돼지삼겹살, 고기국수, 돔베고기, 성게미역국<br> 액티비티 : 바체올린 카약, 더마파크 승마, 974 카트 테마파크<br> ",
             'like' : 0,
             'type' : 'C'
         },
@@ -126,7 +143,7 @@ def setData():
             'id' : 4, 
             'city' : '강릉',
             'image' : './static/강릉.jpg',
-            'desc' : "가지마 가지마 가지마 가지마 가지마 가지마 가지마 가지마",
+            'desc' : " 강원도 강릉시<br> 여행지 : 경포해수욕장, 오죽헌, 경포대, 정동진 해변 <br>먹거리 : 초당 두부, 감자 옹심이, 물회, 장칼국수 <br> 액티비티 : 서핑, 요트투어, 정동진 레일바이크<br>",
             'like' : 0,
             'type' : 'B'
         },
@@ -134,7 +151,7 @@ def setData():
             'id' : 5, 
             'city' : '여수',
             'image' : './static/여수.jpg',
-            'desc' : "엑스포 엑스포 엑스포 엑스포 엑스포 엑스포 엑스포 엑스포",
+            'desc' : "전라남도 여수시<br> 여행지 : 오동도, 향일암, 여수 아쿠아리움, 아이뮤지엄 미디어 포레스트<br> 먹거리 : 돌산갓김치, 게장 백반, 서대회무침<br> 액티비티 : 유월드 루지 테마파크, 라마다 여수 해상 짚트랙<br>",
             'like' : 0,
             'type' : 'E'
         } ,
@@ -142,7 +159,7 @@ def setData():
             'id' : 6, 
             'city' : '광안리',
             'image' : './static/광안리.jpg',
-            'desc' : "갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기 갈매기",
+            'desc' : "부산 광역시<br> 여행지 : 해운대, 광안리, 태종대유원지, 감천문화마을<br> 먹거리 : 돼지국밥, 밀면, 제철 회, 냉채 족발, 동래파전<br> 액티비티 : 광안리 제트보트&요트투어, 패들보드, 카약, 카이트 서핑<br>",
             'like' : 0,
             'type' : 'C'
         }      

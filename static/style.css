@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: "Jua", sans-serif;
+  user-select: none;
 }
 body {
   margin: 0;
@@ -318,6 +319,10 @@ body {
   text-align: center;
   margin-top: 50px;
 }
+
+.img > img {
+  border-radius: 20px;
+}
 .button {
   background-color: rgb(23, 71, 0);
   color: white;
@@ -330,9 +335,22 @@ body {
   margin-top: 50px;
 }
 .card-title {
-  margin-top: 50px;
+  margin-top: 80px;
+  text-align: center;
+  margin: auto;
+  width: 700px;
 }
 .card-text {
-  font-family: "Dongle", sans-serif;
-  font-family: "Jua", sans-serif;
+  margin-top: 50px;
+  font-size: 36px;
+  text-align: left;
+  color: #387700;
+}
+.card-ttext {
+  text-align: left;
+  font-size: 24px;
+}
+.location {
+  color: rgb(23, 71, 0);
+  font-size: 72px;
 }
