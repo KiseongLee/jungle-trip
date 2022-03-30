@@ -20,16 +20,11 @@
   <script>
     const cardBox = $('.card-box')    
     
-    function onClickLike(city){
-      
-      
+    function onClickLike(city){     
        if ($.cookie('mytoken')==null){
           alert("로그인을 해주세요")
           return
-         }
-       
-            
-            
+         }          
 
       $.ajax({
         type : "POST",
@@ -37,6 +32,17 @@
         data : {'city' : city},
         success : res => {
           if(res['result'] === 'success'){
+            return
+          }
+        }
+      })
+
+      $.ajax({
+        type : "POST",
+        url : "/like/check",
+        data : {'userId': getToken(), 'city' : city},
+        success : res => {
+          if(res['result'] === 'success'){            
             window.location.reload()
           }
         }
@@ -67,9 +73,21 @@ function logout(){
           })
         }
       }
-    })
+    })  
   
     function makeCard(data){
+      const userId = getToken();
+      const city = data['city'];
+
+      $.ajax({
+        type : "POST",
+        url : "/like/confirm",
+        data : {'city' : city, 'userId' : userId},
+        success : (res) => {
+          console.log(res)
+        }
+      })     
+
       const card = `<li class="card">
         <img class = "card__image" src="${data['image']}">         
         <div class="text"><b>${data['city']}</b></div>   
@@ -81,5 +99,15 @@ function logout(){
     </li>`
       cardBox.append(card)
     }
+
+    function getToken(){
+      const token = document.cookie.split("=")[1]
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload).id; 
+  }
   </script>
 {%endblock %}

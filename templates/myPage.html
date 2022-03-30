@@ -3,10 +3,17 @@
 <div class="frontpage">
  <div class="myPageContainer">
     <header class="header">
-        <h1 class="myPage__title">취향조사</h1>
-        <button class="myPage__button">취향조사</button>        
+        <h1 class="myPage__title">My Page</h1>
+        <div>
+          <button class="myPage__button home_button">홈</button>  
+          <button class="myPage__button">취향조사</button>        
+        </div>
     </header>
-    <ul class="cardContainer"></ul>
+    <ul class="cardContainer">
+      <div class="empty_image">
+        <p>상단의 '취향조사'를 통해 나의 여행지를 추가하세요</p>
+      </div>
+    </ul>
   </div>
  </div>
 </div>
@@ -14,6 +21,9 @@
 <script>
     $('.myPage__button').click(()=>{
       window.location.href='./survey';
+    })
+    $('.home_button').click(()=>{
+      window.location.href='./';
     })
 
     function getToken(){
@@ -31,9 +41,12 @@
       url : "/myPage",
       data : {userId : getToken()},
       success : (res) => {
-        res['type'].map((type,index)=> {
-          setMyCard(type, index)
-        })
+        if(res['type'].length > 0){
+          $('.empty_image').css('display','none')
+        }
+          res['type'].map((type,index)=> {
+            setMyCard(type, index)
+          })      
       }
     })
 
@@ -62,7 +75,6 @@
         }
       })
     }
-
     function getToken(){
       const token = document.cookie.split("=")[1]
       var base64Url = token.split('.')[1];
@@ -82,7 +94,6 @@
           $('.cardContainer').append(`
           <li class="myCard">
             <img class = "myImage" src="${res['img']}" >   
-
             <div class="myContents">
               <div class="myUpper">
                 

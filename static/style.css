@@ -184,12 +184,10 @@ body {
 .cardContainer {
   margin-top: 80px;
   height: 700px;
-
   border-radius: 15px;
   background-color: white;
   border-radius: 15px;
-
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .Button {
@@ -367,17 +365,16 @@ body {
   font-size: 72px;
 }
 .cardContainer {
-  padding: 50px;
+  padding: 60px;
   display: flex;
 
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 .myCard {
   width: 450px;
   height: 310px;
   position: relative;
-  margin: 10px;
+  margin: 10px 25px 10px 35px;
   overflow: hidden;
 }
 .myImage {
@@ -428,4 +425,12 @@ body {
   margin-left: 10px;
   margin-top: 70px;
   color: black;
+}
+.empty_image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: rgb(143, 140, 140);
 }

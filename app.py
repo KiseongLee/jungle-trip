@@ -1,5 +1,7 @@
+from asyncio.windows_events import NULL
 import json
 from flask import Flask, render_template, request, jsonify
+from jinja2 import Undefined
 from pymongo import MongoClient
 import hashlib
 import jwt
@@ -146,6 +148,25 @@ def myPage_delete():
     db.user.update_one({'id':userId}, {'$set':{'type':types}})    
     
     return jsonify({'result' : "success"});
+    
+@app.route('/like/check', methods =['POST'])
+def likeCheck():
+    userId = request.form['userId']
+    city = request.form['city']    
+    db.like.insert_one({'city' : city, 'userId': userId})
+    return jsonify({'result' : "success"})
+
+@app.route('/like/confirm' , methods=['POST'])
+def likeConfirm():
+    userId = request.form['userId']
+    city = request.form['city']
+    arr = list(db.like.find({'userId':userId},{'_id' : False}))
+   
+    for item in arr:
+        if item['city']==city :
+            return jsonify({'result' : "success", 'confirm' : False})
+    else : 
+        return jsonify({'result' : "success", 'confirm' : True})
     
     
 # 초기 데이터 불러오기
