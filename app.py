@@ -146,6 +146,19 @@ def myPage_delete():
     db.user.update_one({'id':userId}, {'$set':{'type':types}})    
     
     return jsonify({'result' : "success"});
+
+# 8. 로그인 중복
+def id_check(idcheck):
+    if db.user.find_one({'id': idcheck}):
+       return True
+    return False
+
+@app.route('/api/overlapcheck', methods=['POST'])
+def id_overlap_check():
+    idcheck = request.form['username']
+    if id_check(idcheck):
+        return jsonify({'success': False})
+    return jsonify({'success': True})
     
     
 # 초기 데이터 불러오기
