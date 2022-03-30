@@ -95,6 +95,7 @@ def survey_result():
     userType = request.form['userType']
     
     user = db.user.find_one({'id' : userId})
+    print(user)
     types = user['type']
     types.append(userType)
     db.user.update_one({'id':userId}, {'$set':{'type':types}})    
@@ -121,8 +122,6 @@ def myPages_getTypes():
     userId = request.form['userId']
     user = db.user.find_one({'id' : userId})
     types = user['type']
-    
-    print(types)   
     return jsonify({"result":"success", 'type' : types })
 
 # 6. 
